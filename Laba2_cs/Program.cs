@@ -197,8 +197,22 @@ namespace Laba2_cs
     {
         static void Main(string[] args)
         {
-            Game.InputFile = "1.ChaseData.txt";
-            Game.OutFile = "1.PursuitLog.txt";
+           
+            string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+
+            
+            string projectRootPath = Path.Combine(exeDir, "..", "..", "..", "1.ChaseData.txt");
+
+            if (File.Exists(projectRootPath))
+            {
+                Game.InputFile = projectRootPath;
+                Game.OutFile = Path.Combine(exeDir, "..", "..", "..", "1.PursuitLog.txt");
+            }
+            else
+            {
+                Game.InputFile = Path.Combine(exeDir, "1.ChaseData.txt");
+                Game.OutFile = Path.Combine(exeDir, "1.PursuitLog.txt");
+            }
 
             int boardSize = 16;
             if (File.Exists(Game.InputFile))
